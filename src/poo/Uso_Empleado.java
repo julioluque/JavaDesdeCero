@@ -27,7 +27,6 @@ public class Uso_Empleado {
 
 		Comparable ejemplo = new Empleado("Elizabeth", 95000, 2012, 05, 05);
 
-		
 		// podemos usar instance of tanto con clases como interfaces
 		if (director_comercial instanceof Empleado) {
 			System.out.println("Es de tipo Jefatura."); // jefatura hereda de empleado
@@ -43,6 +42,8 @@ public class Uso_Empleado {
 
 		Arrays.sort(misEmpleados);
 
+		System.out.println(jefa_Finanzas.tomar_decisiones("Dar mas dias de vacaciones"));
+		
 		for (Empleado e : misEmpleados) {
 			System.out.println("Nombre: " + e.dameNombre() + " Sueldo: " + e.dameSueldo() + " Fecha de alta: "
 					+ e.dameFechaContrato());
@@ -105,12 +106,17 @@ class Empleado implements Comparable {
 
 }
 
-class Jefatura extends Empleado {
+class Jefatura extends Empleado implements Jefes {
 
 	private double incentivo;
 
 	public Jefatura(String nom, double sue, int agno, int mes, int dia) {
 		super(nom, sue, agno, mes, dia);
+	}
+
+	public String tomar_decisiones(String decision) {
+		return "La clase Jefatura toma la decision de " + decision
+				+ ". Esta clase hereda Empleado e implementa la interfaz Jefes";
 	}
 
 	public void estableceIncentivo(double b) {
