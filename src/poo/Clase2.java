@@ -10,7 +10,7 @@ public class Clase2 {
 		Clase1 miObj= new Clase1();
 		
 		Clase3 miObj2 = new Clase3();
-		miObj2.
+//		miObj2.
 		
 	}
 

@@ -43,6 +43,10 @@ public class Uso_Empleado {
 		Arrays.sort(misEmpleados);
 
 		System.out.println(jefa_Finanzas.tomar_decisiones("Dar mas dias de vacaciones"));
+
+		jefa_Finanzas.establece_bonus(500);
+		System.out.println("El jefe " + jefa_Finanzas.dameNombre() + " tiene un bonus de " + jefa_Finanzas.establece_bonus(500));
+		System.out.println(misEmpleados[3].dameNombre() + " tiene un bonus de : " + misEmpleados[3].establece_bonus(200));
 		
 		for (Empleado e : misEmpleados) {
 			System.out.println("Nombre: " + e.dameNombre() + " Sueldo: " + e.dameSueldo() + " Fecha de alta: "
@@ -51,7 +55,7 @@ public class Uso_Empleado {
 	}
 }
 
-class Empleado implements Comparable {
+class Empleado implements Comparable, Trabajadores{
 
 	private String nombre;
 	private double sueldo;
@@ -83,6 +87,12 @@ class Empleado implements Comparable {
 		return 0;
 	}
 
+	@Override 
+	public double establece_bonus (double gratiicacion) {
+	
+		return Trabajadores.bonus_base + gratiicacion;
+	}
+	
 	public Empleado(String nom) {
 		this(nom, 30000, 2000, 1, 1);
 	}
@@ -113,15 +123,23 @@ class Jefatura extends Empleado implements Jefes {
 	public Jefatura(String nom, double sue, int agno, int mes, int dia) {
 		super(nom, sue, agno, mes, dia);
 	}
-
+	
+	@Override
 	public String tomar_decisiones(String decision) {
 		return "La clase Jefatura toma la decision de " + decision
 				+ ". Esta clase hereda Empleado e implementa la interfaz Jefes";
 	}
 
+	@Override
+	public double establece_bonus(double gratificacion) {
+		double prima = 2000;
+		return Trabajadores.bonus_base + gratificacion + prima;
+	}
+
 	public void estableceIncentivo(double b) {
 		incentivo = b;
 	}
+
 
 	public double dameSueldo() {
 		double sueldoJefe = super.dameSueldo();
