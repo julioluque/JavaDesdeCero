@@ -2,7 +2,6 @@ package poo;
 
 import javax.swing.*;
 import javax.swing.Timer;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Toolkit;
@@ -11,10 +10,10 @@ import java.util.*;
 public class pruebaTemporizador2 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		Reloj miReloj = new Reloj(3000, true);
-		miReloj.enMarcha();
+		Reloj miReloj = new Reloj();
+		
+		miReloj.enMarcha(3000, true);
 
 		JOptionPane.showMessageDialog(null, "Aceptar para terminar");
 
@@ -26,12 +25,18 @@ public class pruebaTemporizador2 {
 
 class Reloj {
 
-	public Reloj(int intervalo, boolean sonido) {
-		this.intervalo = intervalo;
-		this.sonido = sonido;
-	}
+	public void enMarcha(int intervalo, final boolean sonido) {
 
-	public void enMarcha() {
+		class DameLaHora2 implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Date ahora = new Date();
+				System.out.println("Contador cada 3 segundos" + ahora);
+				if (sonido) {
+					Toolkit.getDefaultToolkit().beep();
+				}
+			}
+		}
 
 		ActionListener oyente = new DameLaHora2();
 
@@ -39,24 +44,5 @@ class Reloj {
 		miTemporizador.start();
 
 	}
-
-	private int intervalo;
-	private boolean sonido;
-
-
-	private class DameLaHora2 implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-			Date ahora = new Date();
-
-			System.out.println("Contador cada 3 segundos" + ahora);
-
-			if (sonido) {
-				Toolkit.getDefaultToolkit().beep();
-			}
-		}
-	}
-	
 
 }
